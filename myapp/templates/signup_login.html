@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp/Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/signup_login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="inner-container">
+            <div class="card signup-card">
+                <form role="form" method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="card-header">
+                    <h2>SignUp</h2>
+                    <button type="button" class="btn"  id="Signup-Patient">Patient</button>
+                    <button type="button" class="btn"  id="Signup-Doctor">Doctor</button>
+                </div>
+                <hr>
+                <h3 id="Signup-name">SignUp as : Patient</h3>
+                <div class="card-content">
+                    <div><label>Name: </label></div>
+                    <input type="text" name="fname" id="fname" placeholder="FirstName" required>
+                    <input type="text" name="lname" id="lname" placeholder="LastName" required>
+
+                    <div><label>Profile Picture: </label></div>
+                    <input type="file" name="proimg" accept="image/jpeg" required>
+
+                    <div><label>Username: </label></div>
+                    <input type="text" name="uname"  placeholder="Username" required>
+
+                    <div><label>Email Id: </label></div>
+                    <input type="email" name="eid"  placeholder="Email Id" required>
+
+                    <div><label>Password: </label></div>
+                    <input type="password" name="pass1"  id="pass1" placeholder="Password" required>
+                    <input type="password" name="pass2" id="pass2"  placeholder="Confirm Password" required>
+
+                    <div><label>Address: </label></div>
+                    <input type="text" name="address"  placeholder="Address" required>
+                    <input type="text" name="city"  placeholder="city" required>
+                    <input type="text" name="state"  placeholder="state" required>
+                    <input type="text" name="pcode"  placeholder="Pincode" required>
+
+                    <br>
+                    <button type="submit" name="user" id="Signup">SignUp</button>
+                </div>
+                    </form>
+            </div>
+
+
+
+            <div class="card login-card">
+                <form role="form" method="POST" action="">
+                    {% csrf_token %}
+                <div class="card-header">
+                    <h2>Login</h2>
+                    <button type="button" class="btn" id="Login-Patient">Patient</button>
+                    <button type="button" class="btn" id="Login-Doctor">Doctor</button>
+                </div>
+                <hr>
+                <h3 id="Login-name">Login as : Patient</h3>
+                <div class="card-content">
+                    <div><label>Username: </label></div>
+                    <input type="text" name="uname"  placeholder="Username" required>
+
+                    <div><label>Password: </label></div>
+                    <input type="password" name="pass"  placeholder="Password" required>
+
+
+                    <br>
+                    <button type="submit" name="user" id="Login">Login</button>
+                </div>
+                    </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+<!--        for signup-->
+        document.getElementById('Signup-Patient').addEventListener('click',function changeName(){
+            document.getElementById('Signup-name').innerText = 'SignUp as : Patient' ;
+            document.getElementById('Signup').value = 'Signup-Patient';
+        });
+        document.getElementById('Signup-Doctor').addEventListener('click',function changeName(){
+            document.getElementById('Signup-name').innerText = 'SignUp as : Doctor' ;
+            document.getElementById('Signup').value = 'Signup-Doctor';
+        });
+
+<!--        for login-->
+        document.getElementById('Login-Patient').addEventListener('click',function changeName(){
+            document.getElementById('Login-name').innerText = 'Login as : Patient' ;
+            document.getElementById('Login').value = 'Login-Patient';
+        });
+        document.getElementById('Login-Doctor').addEventListener('click',function changeName(){
+            document.getElementById('Login-name').innerText = 'Login as : Doctor' ;
+            document.getElementById('Login').value = 'Login-Doctor';
+        });
+
+<!--  password validity      -->
+        var password = document.getElementById("pass1"),
+        confirm_password = document.getElementById("pass2");
+
+        function validatePassword(){
+          if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+          } else {
+            confirm_password.setCustomValidity('');
+          }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+
+<!--image -->
+        var file = document.getElementById('proimg');
+
+        file.onchange = function(e) {
+          var ext = this.value.match(/\.([^\.]+)$/)[1];
+          switch (ext) {
+            case 'jpeg':
+              alert('File Uploaded succesfully');
+              break;
+            case 'jpg':
+              alert('File Uploaded succesfully');
+              break;
+            case 'png':
+              alert('File Uploaded succesfully');
+              break;
+            default:
+              alert('File Not allowed : Only jpeg,jpg,png files are allowed');
+              this.value = '';
+          }
+        };
+    </script>
+</body>
+</html>

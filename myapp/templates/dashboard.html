@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+{% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+</head>
+<body>
+    <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Details</h2>
+                </div>
+                <hr>
+                <div class="card-content">
+                    {% for i in data%}
+                    <img src="/media/{{i.profileImg}}" alt="Avatar">
+                    <br>
+
+                    <label>Name: </label> <label>{{i.firstname}} {{i.lastname}}</label> <br> </br>
+                    <label>Username: </label> <label>{{i.Username}}</label> <br> </br>
+                    <label>Email Id: </label> <label>{{i.emailId}}</label> <br> </br>
+                    <label>Password: </label> <label>{{i.password}}</label> <br> </br>
+                    <label>Address: </label> <label>{{i.address}}, {{i.city}}, {{i.state}}, {{i.pincode}}</label> <br> </br>
+
+                    <button onclick="window.location.href='/'">Logout</button>
+
+                    {% endfor %}
+                </div>
+            </div>
+    </div>
+</body>
+</html>
